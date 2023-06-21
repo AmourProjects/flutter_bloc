@@ -8,17 +8,23 @@ class ThemeCubit extends Cubit<ThemeData> {
     primarySwatch: Colors.blue,
     brightness: Brightness.light,
     appBarTheme: const AppBarTheme(
-      color: Colors.blue,
+      color: Colors.red,
     ),
-    primaryColor: Colors.blue,
   );
 
-  static final _darkTheme = ThemeData( 
-    brightness: Brightness.dark,
-    primaryColor: Colors.blueGrey,
-  );
+  void changeTheme(MaterialColor themeColor, Brightness themeBrightness) {
+    final colorTheme = ThemeData(
+      primarySwatch: themeColor,
+      brightness: themeBrightness,
+      primaryColor: themeColor,
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: themeColor,
+      ),
+      appBarTheme: AppBarTheme(
+        color: themeColor,
+      ),
+    );
 
-  void toggleTheme() {
-    emit(state.brightness == Brightness.dark ? _lightTheme : _darkTheme);
+    emit(colorTheme);
   }
 }
